@@ -1,0 +1,48 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.bg-one {
+    background: #2A0944
+}
+
+.bg-two {
+    background: #3B185F
+}
+
+.bg-three {
+    background: #A12568
+}
+
+.bg-four {
+    background: #FEC260
+}
+
+.btn-bg-five {
+    background: #A12568;
+    border-radius: 10px;
+    border: 1px solid #A12568;
+    color: white;
+}
+
+.text-style-one {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* FONTS  */
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}

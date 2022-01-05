@@ -1,4 +1,4 @@
-import Container from "../components/container"
+import Celular from "../components/celular"
 import Head from "next/head"
 
 const Services = () => {
@@ -7,9 +7,9 @@ const Services = () => {
             <Head>
                 <title>Services</title>
             </Head>
-            <Container>
+            <Celular>
                 <h1>Services</h1>
-            </Container>
+            </Celular>
         </div>
     )
 }

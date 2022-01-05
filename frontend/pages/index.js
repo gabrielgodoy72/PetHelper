@@ -1,4 +1,4 @@
-import Container from "../components/container"
+import Celular from "../components/celular"
 import Head from "next/head"
 import Link from "next/link"
 import { useFormik } from 'formik'
@@ -38,7 +38,7 @@ const Index = () => {
             <Head>
                 <title>Home</title>
             </Head>
-            <Container>
+            <Celular>
                <form onSubmit={formik.handleSubmit} className="font-roboto">
                     <div className="pt-5" style={{height: '330px'}}>
                         <h1 className="text-center text-white mt-5 pt-5">Iniciar Sesión</h1>
@@ -81,7 +81,7 @@ const Index = () => {
                             <a className="text-white">Registrate</a>
                         </Link></p>
                </form>
-            </Container>
+            </Celular>
         </div>
     )
 

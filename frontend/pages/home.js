@@ -1,6 +1,7 @@
-import Container from "../components/container"
+import Celular from "../components/celular"
 import Head from "next/head"
 import Cards from '../components/cards'
+import Menu from '../components/menu'
 import { getAll } from "../api/crud"
 
 const Home = () => {
@@ -13,9 +14,13 @@ const Home = () => {
             <Head>
                 <title>Home</title>
             </Head>
-            <Container>
-                <Cards archivos={archivos} imagenes={imagenes}/>
-            </Container>
+            <Celular> 
+                <div className="font-montserrat">
+                    <Menu title={'Inicio'}>
+                        <Cards archivos={archivos} imagenes={imagenes}/>
+                    </Menu>
+                </div>
+            </Celular>
         </div>
     )
 

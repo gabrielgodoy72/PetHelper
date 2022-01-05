@@ -1,9 +1,12 @@
 import Card from "./card";
 
-const Cards = ({archivos}) => {
+const Cards = ({archivos, imagenes}) => {
     return (
         <div className="d-flex flex-wrap justify-content-around bg-one">
-            { Array.isArray(archivos) && archivos.map( archivo => (<Card key={archivo.Id} archivo={archivo}/>) ) }
+            { Array.isArray(archivos) && Array.isArray(imagenes) &&
+                archivos.map( archivo => 
+                    (<Card key={archivo.Id} archivo={archivo} imagen={imagenes.filter(img => img.FichaId === archivo.Id)}/>)) 
+            }
         </div>
     )
 }

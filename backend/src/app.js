@@ -12,6 +12,7 @@ import speciesRoutes from './resources/species/species.routes'
 import sexRoutes from './resources/sex/sex.routes'
 import raceRoutes from './resources/race/race.routes'
 import archiveRoutes from './resources/archive/archive.routes'
+import archiveImageRoutes from './resources/archive_img/archive_img.routes'
 
 import { createTables, initTables } from './utils'
 
@@ -38,6 +39,7 @@ app.use('/api/especies', speciesRoutes)
 app.use('/api/sexos', sexRoutes)
 app.use('/api/razas', raceRoutes)
 app.use('/api/archivos', archiveRoutes)
+app.use('/api/imagenes/archivo', archiveImageRoutes)
 
 export default app
  

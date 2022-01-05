@@ -7,6 +7,7 @@ import Especies from '../resources/species/species.model'
 import Sexos from '../resources/sex/sex.model'
 import Razas from '../resources/race/race.model'
 import Archivos from '../resources/archive/archive.model'
+import ImagenDeFicha from "../resources/archive_img/archive_img.model"
 
 export const encryptPassword = async (password) => {
     const salt = await bcryptjs.genSalt(10)
@@ -27,6 +28,7 @@ export const createTables = async () => {
         await Usuarios.sync(),
         await Roles_Usuario.sync()
         await Archivos.sync()
+        await ImagenDeFicha.sync()
     } catch (error) {
         console.log('\n\tOcurrió un error con la conexion a la BD\n', error.message)
     }

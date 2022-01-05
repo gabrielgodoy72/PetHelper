@@ -5,7 +5,8 @@ import { getAll } from "../api/crud"
 
 const Home = () => {
 
-    const {data: archivos, loading, error, statusCode} = getAll('/api/archivos')
+    const {data: archivos, loading: loadingA, error: errorA, statusCode: statusCodeA} = getAll('/api/archivos')
+    const {data: imagenes, loading: loadingI, error: errorI, statusCode: statusCodeI} = getAll('/api/imagenes/archivo')
     
     return (
         <div>
@@ -13,7 +14,7 @@ const Home = () => {
                 <title>Home</title>
             </Head>
             <Container>
-                <Cards archivos={archivos} />
+                <Cards archivos={archivos} imagenes={imagenes}/>
             </Container>
         </div>
     )

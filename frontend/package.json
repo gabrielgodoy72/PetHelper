@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
     "formik": "^2.2.9",

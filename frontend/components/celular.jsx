@@ -2,7 +2,7 @@ const Container = (props) => {
 
     return (
         <div className="d-flex justify-content-center">
-            <div className="phone overflow-hidden bg-one">
+            <div className="phone overflow-hidden bg-one" style={{position: 'absolute', zIndex: '10'}}>
                 {props.children}
             </div>
             <style jsx>{`

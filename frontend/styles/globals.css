@@ -42,6 +42,12 @@ a {
     cursor: pointer;
 }
 
+.etiqueta { 
+    -webkit-border-radius: 300px 0px 0px 0px;
+    -moz-border-radius: 300px 0px 0px 0px;
+    border-radius: 300px 0px 0px 0px;
+}
+
 /* FONTS  */
 .font-roboto {
     font-family: 'Roboto', sans-serif;

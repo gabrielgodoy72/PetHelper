@@ -1,8 +1,8 @@
-import Celular from "../components/celular"
+import Celular from "../../components/celular"
 import Head from "next/head"
-import Cards from '../components/cards'
-import Menu from '../components/menu'
-import { getAll } from "../api/crud"
+import Cards from '../../components/cards'
+import Menu from '../../components/menu'
+import { getAll } from "../../api/crud"
 
 const Home = () => {
 

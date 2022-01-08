@@ -9,7 +9,7 @@ export const sequelize = new Sequelize(
         dialect: 'mssql',
         port: environment.dbPort,
         hots: environment.dbServer,
-        // logging: false
+        logging: false
     }
 )
 

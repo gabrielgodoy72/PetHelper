@@ -9,7 +9,7 @@ const Card = ({archivo, imagen}) => {
     }
 
     return (
-        <Link href={`/home/${archivo.Id}`}>
+        <Link href={(archivo.Estado.Nombre === 'Para Adoptar')? `/home/${archivo.Id}` : `/home`}>
             <div className="card flex-grow-1 mx-2 my-2 border border-dark pointer" style={{width: '8rem'}}>
                 <div className="d-flex justify-content-end align-items-end">
                     <img src={`/${imagen[0].Nombre}.png`} className="card-img-top" alt={`/${imagen[0].Nombre}.png`} />

@@ -22,7 +22,7 @@ const Home = () => {
         if(archivos.length && imagenes.length) {
             setPrevArchivo(archivos.find(a => { return a.Id === id }))
             setImgDeArchivo(imagenes.filter(i => { return i.FichaId === id }))
-            setListArchivos(archivos.filter(a => { return a.Id !== id }))
+            setListArchivos(archivos.filter(a => { return (a.Id !== id) && (a.Estado.Nombre === 'Para Adoptar') }).reverse())
         }
     }, [archivos, imagenes, id])
 

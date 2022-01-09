@@ -20,7 +20,7 @@ export const save = async(req, res) => {
 
 export const getAll = async(req, res) => {
     const result = await Archivos.findAll({
-        attributes: ['Id', 'FechaPublicacion'],
+        attributes: ['Id', 'FechaPublicacion', 'Edad'],
         include: [
             { model: Sexos, 
                 attributes: ['Nombre'] }, 

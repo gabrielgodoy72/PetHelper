@@ -38,9 +38,9 @@ const Menu = ({title, children}) => {
                     onClick={() => setShowMenu(!showMenu)}/>
             </div>}
             {/* Contenido de la App */}
-            <Container className="bg-one mt-3">
+            <div className="bg-one">
                 {children}
-            </Container>
+            </div>
             <style jsx>{`
             `}</style>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import MenuItem from "./menu_item"
 import { useRouter } from "next/router"
+import { Container } from "react-bootstrap"
 
 const Menu = ({title, children}) => {
 
@@ -29,7 +30,7 @@ const Menu = ({title, children}) => {
                     <MenuItem imagen='home' texto='Inicio' href={'/home'}/>
                     <MenuItem imagen='user' texto='Mi Perfil' href={'/perfil'}/>
                     <MenuItem imagen='reportado' texto='Reportar' href={'/home'}/>
-                    <MenuItem imagen='para_adoptar' texto='Dar en Adopción' href={'/home'}/>
+                    <MenuItem imagen='para_adoptar' texto='Dar en Adopción' href={'/adopcion'}/>
                     <MenuItem imagen='aportes_ayudas' texto='Aportes y Ayudas' href={'/aportes'}/>
                     <MenuItem imagen='cerrar_sesion' texto='Cerrar Sesión' href={'/'}/>
                 </div>
@@ -37,9 +38,9 @@ const Menu = ({title, children}) => {
                     onClick={() => setShowMenu(!showMenu)}/>
             </div>}
             {/* Contenido de la App */}
-            <div className="bg-one">
+            <Container className="bg-one mt-3">
                 {children}
-            </div>
+            </Container>
             <style jsx>{`
             `}</style>
         </div>

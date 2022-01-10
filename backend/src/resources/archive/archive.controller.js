@@ -3,6 +3,7 @@ import Sexos from '../sex/sex.model'
 import Razas from '../race/race.model'
 import Especies from '../species/species.model'
 import Estados from '../state/state.model'
+import Usuarios from '../credentials/user/user.model'
 
 export const save = async(req, res) => {
     const { Edad, FechaPublicacion, Descripcion, SexoId, RazaId, UsuarioId, EstadoId } = req.body
@@ -22,6 +23,8 @@ export const getAll = async(req, res) => {
     const result = await Archivos.findAll({
         attributes: ['Id', 'FechaPublicacion', 'Edad'],
         include: [
+            { model: Usuarios,
+                attributes: ['Id', 'Nombre']},
             { model: Sexos, 
                 attributes: ['Nombre'] }, 
             { model: Estados, 

@@ -1,14 +1,14 @@
 import { useRouter } from "next/router"
 
-const Previsualizacion = ({archivo, imagenes}) => {
+const Previsualizacion = ({archivo, imagenes, onShowAll, showAll}) => {
 
     const router = useRouter()
 
     return (
-        <div className="bg-one border-bottom border-white mb-2" style={{height: '20rem'}}>
-            <div style={{position: 'absolute', zIndex: '2', right: '5px'}} className="my-2 mx-2" onClick={() => {router.push('/home')}}>
+        <div className="bg-one border-bottom border-white" style={{height: '20rem'}}>
+            {!showAll && <div style={{position: 'absolute', zIndex: '2', right: '5px'}} className="my-2 mx-2" onClick={() => {router.push('/home')}}>
                 <img alt="exit icon" src="/salir.svg" />
-            </div>
+            </div>}
             <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div>
@@ -32,17 +32,12 @@ const Previsualizacion = ({archivo, imagenes}) => {
                     <div className="boton d-flex justify-content-around">
                         Adoptar <img alt="whatsapp icon" src="/whatsapp.svg" />
                     </div>
-                    <div className="boton d-flex justify-content-around">
+                    {!showAll && <div className="boton d-flex justify-content-around" onClick={() => onShowAll()}>
                         Mas Info <img alt="info icon" src="/info.svg" />
-                    </div>
+                    </div>}
                 </div>
             </div>
             <style jsx>{`
-                .info {
-                    margin-bottom: 3px;
-                    color: white;
-                    font-size: 10px;
-                }
                 .boton {
                     cursor: pointer;
                     margin-bottom: 5px;

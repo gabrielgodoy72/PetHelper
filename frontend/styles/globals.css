@@ -49,6 +49,12 @@ a {
     border-radius: 300px 0px 0px 0px;
 }
 
+.info {
+    margin-bottom: 3px;
+    color: white;
+    font-size: 10px;
+}
+
 /* FONTS  */
 .font-roboto {
     font-family: 'Roboto', sans-serif;

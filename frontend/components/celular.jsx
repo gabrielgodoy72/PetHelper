@@ -8,7 +8,7 @@ const Celular = (props) => {
       <style jsx>{`
         .phone {
           width: 360px;
-          height: 720px;
+          height: 750px;
           border-radius: 20px;
           border: 1px solid black;
         }

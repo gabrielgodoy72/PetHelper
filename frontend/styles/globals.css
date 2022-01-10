@@ -55,6 +55,11 @@ a {
     font-size: 10px;
 }
 
+.bottom{
+    position: relative; 
+    bottom: 0px; 
+}
+
 /* FONTS  */
 .font-roboto {
     font-family: 'Roboto', sans-serif;

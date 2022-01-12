@@ -2,7 +2,7 @@ import { useState } from "react"
 import MenuItem from "./menu_item"
 import { useRouter } from "next/router"
 import { Container, Button } from "react-bootstrap"
-import Modal from './modal'
+import ModalReporte from './modal_reporte'
 
 const Menu = ({title, children, onShowAll, showAll}) => {
 
@@ -56,44 +56,12 @@ const Menu = ({title, children, onShowAll, showAll}) => {
             </div>}
             {/* Contenido de la App, el modal se muestra sobre el contenido actual */}
             {showReportModal && 
-                <Modal>
-                    <div className="mi-modal flex-column" 
-                         style={{height: '85%', width: '85%'}}>
-                        <div className="modal-header">
-                            <h5 className="modal-title">Reportar</h5>
-                            <button type="button" className="btn-close" aria-label="Close" onClick={() => setshowReportModal(false)} />
-                        </div>
-                        <div>
-                            <h1>Hola Mundo</h1>
-                        </div>
-                        <div className="modal-footer mt-auto p-2">
-                            <button className="btn btn-outline-secondary" onClick={() => setshowReportModal(false)}>
-                                Cancelar
-                            </button>
-                            <button className="btn btn-save" onClick={() => setshowReportModal(false)}>
-                                Guardar
-                            </button>
-                        </div>
-                    </div>   
-                </Modal>
+                <ModalReporte onClose={() => setshowReportModal(false)}/>
             }
             <div className="bg-one">
                 {children}
             </div>
             <style jsx>{`
-                .mi-modal {
-                    background: white;
-                    border: 1px solid gray;
-                    border-radius: 5px;
-                    display: flex;
-                }
-                .btn-save { 
-                    background: #FAAB55;
-                    color: white;
-                }
-                .btn-save:hover {
-                    background: #FF8E13;
-                }
             `}</style>
         </div>
     )

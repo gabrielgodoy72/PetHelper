@@ -6,7 +6,8 @@ const Previsualizacion = ({archivo, imagenes, onShowAll, showAll}) => {
 
     return (
         <div className="bg-one border-bottom border-white" style={{height: '20rem'}}>
-            {!showAll && <div style={{position: 'absolute', zIndex: '2', right: '5px'}} className="my-2 mx-2" onClick={() => {router.push('/home')}}>
+            {!showAll && 
+            <div style={{position: 'absolute', zIndex: '2', right: '5px'}} className="m-2 pointer" onClick={() => {router.push('/home')}}>
                 <img alt="exit icon" src="/salir.svg" />
             </div>}
             <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">

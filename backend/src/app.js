@@ -30,6 +30,15 @@ app.use(helmet())
 app.use(cors())
 
 //routes
+app.use((req, res, next) => {
+    console.log('=========================================')
+    console.log('Request received!')
+    console.log(req.originalUrl)
+    console.log('HEADERS: ', req.headers)
+    console.log('BODY: ', req.body)
+    console.log('=========================================\n')
+    next()
+})
 app.use('/auth', authRoutes)
 app.use('/api/usuarios', userRoutes)
 app.use('/api/roles', roleRoutes)

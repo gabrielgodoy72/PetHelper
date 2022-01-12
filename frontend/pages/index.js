@@ -6,6 +6,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { useState, useEffect } from "react"
 import { post } from "../api/crud"
 import { useRouter } from "next/router"
+import WarningLabel from "../components/warningLabel"
 
 const Index = () => {
 
@@ -54,7 +55,7 @@ const Index = () => {
                                    autoComplete="off"/>
                             <label htmlFor="email">Correo Electrónico</label>
                         </div>
-                        {userNotFount && <span className="text-danger text-end">El usuario no existe</span>}
+                        <WarningLabel enable={userNotFount} fontSize='12px' text='El usuario no existe' end={true}/>
                         <div className="input-group mt-4">
                             <div className="form-floating flex-grow-1">
                                 <input type={showPassword? "text" : "password" }
@@ -69,7 +70,7 @@ const Index = () => {
                                 {showPassword? <BsEyeSlash /> : <BsEye />}
                             </span>
                         </div>
-                        {invalidPassword && <span className="text-danger text-end">La contraseña es incorrecta</span>}
+                        <WarningLabel enable={invalidPassword} fontSize='12px' text='La contraseña es incorrecta' end={true}/>
                     </div>
                     <div className="row px-4 mt-4">
                         <div className="d-grid">

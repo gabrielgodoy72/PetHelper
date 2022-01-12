@@ -2,6 +2,6 @@ import app from './app'
 
 app.listen(
     app.get('port'), () => { 
-        console.log(`\n*****\t*****\t*****\tSERVER RUNNING ON PORT ${app.get('port')}\t*****\t*****\t*****\n`) 
+        console.log(`\nready - started server on 0.0.0.0:3001, url: http://localhost:3001\n`) 
     }
 )

@@ -26,6 +26,10 @@ a {
     background: #FEC260
 }
 
+.bg-five {
+    background: #ffacfb
+}
+
 .btn-bg-five {
     background: #A12568;
     border-radius: 10px;
@@ -49,15 +53,30 @@ a {
     border-radius: 300px 0px 0px 0px;
 }
 
+.label {
+    font-size: 10px;
+    font-weight: 700;
+}
+
 .info {
     margin-bottom: 3px;
     color: white;
     font-size: 10px;
 }
 
-.bottom{
-    position: relative; 
-    bottom: 0px; 
+.mi-modal {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 85%;
+}
+
+.x-center {
+    display: flex;
+    justify-content: center;
 }
 
 /* FONTS  */

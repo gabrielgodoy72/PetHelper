@@ -4,8 +4,13 @@ import Cards from '../../components/cards'
 import Menu from '../../components/menu'
 import { getAll } from "../../api/crud"
 import { useEffect, useState } from "react"
+import useApplicationContext from "../../hooks/useApplicationContext"
+import { useRouter } from "next/router"
 
 const Home = () => {
+
+    const { user } = useApplicationContext();
+    const router = useRouter();
 
     const {data: archivos, loading: loadingA, error: errorA, statusCode: statusCodeA} = getAll('/api/archivos')
     const {data: imagenes, loading: loadingI, error: errorI, statusCode: statusCodeI} = getAll('/api/imagenes/archivo')
@@ -18,6 +23,10 @@ const Home = () => {
             setListImagenes(imagenes)
         }
     }, [archivos, imagenes])
+
+    useEffect(() => {
+        if (user === null) router.push("/");
+      }, []);
     
     return (
         <div>

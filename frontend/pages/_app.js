@@ -1,10 +1,11 @@
 import "../styles/globals.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Head from "next/head"
+import { ApplicationContextProvider } from "../context/ApplicationContext"
 
 const App = ({ Component, pageProps }) => {
   return (
-      <>
+      <ApplicationContextProvider>
         <Head>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -15,7 +16,7 @@ const App = ({ Component, pageProps }) => {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
         </Head>
         <Component {...pageProps} />
-      </>
+      </ApplicationContextProvider>
   )
 }
 

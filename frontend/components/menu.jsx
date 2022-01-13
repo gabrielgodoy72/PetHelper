@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { Container, Button } from "react-bootstrap"
 import ModalReporte from './modal_reporte'
 import ModalAdopcion from "./modal_adopcion"
+import useApplicationContext from "../hooks/useApplicationContext"
 
 const Menu = ({title, children, onShowAll, showAll}) => {
 
@@ -11,6 +12,8 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     const [showReportModal, setshowReportModal] = useState(false)
     const [showAdoptionModal, setshowAdoptionModal] = useState(false)
     const router = useRouter()
+    const { removeUser } = useApplicationContext()
+
     const goToHome = () => {
         if(showMenu) {
             setShowMenu(!showMenu)
@@ -26,6 +29,11 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     const handleAdoptionModal = () => {
         setShowMenu(!showMenu)
         setshowAdoptionModal(!showAdoptionModal)
+    }
+
+    const handleLogout = () => {
+        removeUser()
+        router.push('/')
     }
 
     return (
@@ -60,7 +68,10 @@ const Menu = ({title, children, onShowAll, showAll}) => {
                     </div>
                     {/* <MenuItem imagen='para_adoptar' texto='Dar en Adopción' href={'/adopcion'}/> */}
                     <MenuItem imagen='aportes_ayudas' texto='Aportes y Ayudas' href={'/aportes'}/>
-                    <MenuItem imagen='cerrar_sesion' texto='Cerrar Sesión' href={'/'}/>
+                    <div className='d-flex py-2 pointer' onClick={() => handleLogout()}>
+                        <img width="25px" height="25px" src={`/cerrar_sesion.svg`} alt="logout icon" />
+                        <p className="text-white mx-1 my-0 align-self-center" style={{fontSize: '14px'}}>Cerrar Sesión</p>
+                    </div>
                 </div>
                 <div className="bg-secondary opacity-50" style={{width: '130px'}} 
                     onClick={() => setShowMenu(!showMenu)}/>

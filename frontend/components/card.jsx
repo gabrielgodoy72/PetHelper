@@ -19,7 +19,7 @@ const Card = ({archivo, imagen}) => {
                         </p>
                     </div>
                 </div>
-                <div className={`card-body d-flex justify-content-between p-0 ${bg} `}>
+                <div className={`card-body d-flex justify-content-between p-0 ${bg}`} style={{borderRadius:'0 0 3px 3px'}}>
                     <div className="ms-1">
                         <p className="card-text text-white m-0" style={{fontSize: '15px'}}>{archivo.Raza.Especie.Nombre}</p>
                         <p className="card-text text-white m-0" style={{fontSize: '10px'}}>

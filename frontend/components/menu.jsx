@@ -3,11 +3,13 @@ import MenuItem from "./menu_item"
 import { useRouter } from "next/router"
 import { Container, Button } from "react-bootstrap"
 import ModalReporte from './modal_reporte'
+import ModalAdopcion from "./modal_adopcion"
 
 const Menu = ({title, children, onShowAll, showAll}) => {
 
     const [showMenu, setShowMenu] = useState(false)
     const [showReportModal, setshowReportModal] = useState(false)
+    const [showAdoptionModal, setshowAdoptionModal] = useState(false)
     const router = useRouter()
     const goToHome = () => {
         if(showMenu) {
@@ -19,6 +21,11 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     const handleReportModal = () => {
         setShowMenu(!showMenu)
         setshowReportModal(!showReportModal)
+    }
+
+    const handleAdoptionModal = () => {
+        setShowMenu(!showMenu)
+        setshowAdoptionModal(!showAdoptionModal)
     }
 
     return (
@@ -47,7 +54,11 @@ const Menu = ({title, children, onShowAll, showAll}) => {
                         <img width="25px" height="25px" src={`/reportado.svg`} alt="report icon" />
                         <p className="text-white mx-1 my-0 align-self-center" style={{fontSize: '14px'}}>Reportar</p>
                     </div>
-                    <MenuItem imagen='para_adoptar' texto='Dar en Adopción' href={'/adopcion'}/>
+                    <div className='d-flex py-2 pointer' onClick={() => handleAdoptionModal()}>
+                        <img width="25px" height="25px" src={`/para_adoptar.svg`} alt="adoption icon" />
+                        <p className="text-white mx-1 my-0 align-self-center" style={{fontSize: '14px'}}>Dar en Adopción</p>
+                    </div>
+                    {/* <MenuItem imagen='para_adoptar' texto='Dar en Adopción' href={'/adopcion'}/> */}
                     <MenuItem imagen='aportes_ayudas' texto='Aportes y Ayudas' href={'/aportes'}/>
                     <MenuItem imagen='cerrar_sesion' texto='Cerrar Sesión' href={'/'}/>
                 </div>
@@ -56,7 +67,10 @@ const Menu = ({title, children, onShowAll, showAll}) => {
             </div>}
             {/* Contenido de la App, el modal se muestra sobre el contenido actual */}
             {showReportModal && 
-                <ModalReporte onClose={() => setshowReportModal(false)}/>
+                <ModalReporte onClose={() => setshowReportModal(false)} />
+            }
+            {showAdoptionModal && 
+                <ModalAdopcion onClose={() => setshowAdoptionModal(false)} />
             }
             <div className="bg-one">
                 {children}

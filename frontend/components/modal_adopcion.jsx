@@ -5,7 +5,7 @@ import WarningLabel from './warningLabel'
 import ImageBox from './imageBox'
 import { getAll } from '../api/crud'
 
-const ModalReporte = ({onClose}) => {
+const ModalAdopcion = ({onClose}) => {
 
     const defaultLocation = { lat: -27.30663654561394, lng: -55.88749467693345 } // UNI
     const [location, setLocation] = useState(defaultLocation)
@@ -76,7 +76,7 @@ const ModalReporte = ({onClose}) => {
     }
     
     const handleSaveData = () => {
-        const reporte = estadosData.find(estado => estado.Nombre === 'Reportado')
+        const reporte = estadosData.find(estado => estado.Nombre === 'Para Adoptar')
         const ficha = {
             Id: 0,
             Edad: 0,
@@ -96,7 +96,7 @@ const ModalReporte = ({onClose}) => {
             <div className="x-center w-100 h-100 py-4" style={{position: 'absolute', zIndex: '5'}}>
                 <div className="mi-modal">
                     <div className="modal-header">
-                        <h5 className="modal-title">Reportar</h5>
+                        <h5 className="modal-title">Dar en Adopción</h5>
                         <button className="btn-close" aria-label="Close" onClick={() => onClose()} />
                     </div>
                     <div className="mx-2 d-flex">
@@ -192,4 +192,4 @@ const ModalReporte = ({onClose}) => {
     )
 }
 
-export default ModalReporte
+export default ModalAdopcion

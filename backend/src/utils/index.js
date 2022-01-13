@@ -52,7 +52,8 @@ export const initTables = async () => {
         const countSexos = await Sexos.count()
         if(!countSexos) {
             await Sexos.create({Nombre: 'Macho'}),
-            await Sexos.create({Nombre: 'Hembra'})
+            await Sexos.create({Nombre: 'Hembra'}),
+            await Sexos.create({Nombre: 'No Sabe'})
         } 
 
         const countEspecies = await Especies.count()

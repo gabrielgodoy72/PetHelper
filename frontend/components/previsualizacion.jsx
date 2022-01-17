@@ -6,22 +6,22 @@ const Previsualizacion = ({archivo, imagenes, onShowAll, showAll}) => {
 
     return (
         <div className="bg-one border-bottom border-white" style={{height: '20rem'}}>
-            {!showAll && 
+            {!showAll &&
             <div style={{position: 'absolute', zIndex: '2', right: '5px'}} className="m-2 pointer" onClick={() => {router.push('/home')}}>
                 <img alt="exit icon" src="/salir.svg" />
             </div>}
             <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div>
-                        <img src={`/${imagenes[0].Nombre}.png`} 
-                             className="d-block w-100" 
-                             alt="imagen de mascota" />
+                        <img src={`/${imagenes[0].Nombre}.png`}
+                                className="d-block w-100"
+                                alt="imagen de mascota" />
                     </div>
                 </div>
             </div>
             <div className="d-flex">
                 <div className="ms-2 pt-1" style={{width: '8rem'}}>
-                    <p className="info"><b>Nombre: </b>---</p>
+                    <p className="info"><b>Nombre: </b>{archivo.Nombre}</p>
                     <p className="info"><strong>Edad: </strong>{archivo.Edad}</p>
                     <p className="info"><strong>Sexo: </strong>{archivo.Sexo.Nombre}</p>
                 </div>

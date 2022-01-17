@@ -22,9 +22,9 @@ const Home = () => {
         lat: -27.30663654561394,
         lng: -55.88749467693345,
     } // UNI
-    
+
     const [location, setLocation] = useState(defaultLocation)
-    
+
     const handleAddMarker = ({ lat, lng }) => {
         setLocation({ lat, lng })
         console.log(lat, lng)
@@ -62,7 +62,9 @@ const Home = () => {
                             {/* Requisitos del dueño */}
                             <div className='p-1'>
                                 <p className='info'><b>Requisitos que solicita el dueño</b></p>
-                                <p className='info mx-2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p className='info mx-2'>
+                                    {prevArchivo.Descripcion? prevArchivo.Descripcion: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`}
+                                </p>
                             </div>
                             {/* Mapa */}
                             <div className='px-2'>
@@ -82,7 +84,11 @@ const Home = () => {
                             </Link>
                         </div>}
                     {/* Card de mascotas para Adoptar */}
-                        {!showAll && <Cards archivos={listArchivos} imagenes={imagenes}/>}
+                        {!showAll && 
+                            <div className='overflow-auto' style={{height:'25rem'}}>
+                                <Cards archivos={listArchivos} imagenes={imagenes}/>
+                            </div>
+                        }
                     </Menu>
                 </div>
             </Celular>
@@ -94,6 +100,10 @@ const Home = () => {
                     padding: 15px 25px;
                     border-top: 2px solid black;
                     color: white;
+                }
+                .mi-scroll::-webkit-scrollbar {
+                    display: none;
+                    overflow-y: scroll;
                 }
             `}</style>
         </div>

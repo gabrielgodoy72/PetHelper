@@ -7,10 +7,11 @@ import Estado from '../state/state.model'
 const Ficha = sequelize.define('Fichas',
     {
         Id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+        Nombre: { type: DataTypes.STRING },
         Edad: { type: DataTypes.STRING },
         FechaPublicacion: { type: DataTypes.DATE, allowNull: false },
         Descripcion: { type: DataTypes.STRING }
-    }, 
+    },
     {
         timestamps: false,
         createdAt: false,

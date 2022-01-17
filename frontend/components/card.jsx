@@ -31,7 +31,7 @@ const Card = ({archivo, imagen}) => {
                             src={(archivo.Estado.Nombre === 'Reportado')? `/reportado.svg` : `/para_adoptar.svg`} />
                     </div>
                 </div>
-            </div>    
+            </div>
         </Link>
     )
 }

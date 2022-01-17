@@ -37,7 +37,7 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     }
 
     return (
-        <div className="text-white">
+        <div className="">
             {/* NavBar Menu*/}
             {!showAll && <div className="d-flex justify-content-between border-bottom border-white px-3 py-2">
             <div className="d-flex align-items-center">

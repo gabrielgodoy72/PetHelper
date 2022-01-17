@@ -26,8 +26,8 @@ const Home = () => {
 
     useEffect(() => {
         if (user === null) router.push("/");
-      }, []);
-    
+    }, []);
+
     return (
         <div>
             <Head>
@@ -36,7 +36,9 @@ const Home = () => {
             <Celular> 
                 <div className="font-montserrat">
                     <Menu title={'Inicio'}>
-                        <Cards archivos={listArchivos} imagenes={listImagenes}/>
+                        <div className='overflow-auto border' style={{height:'45rem'}}>
+                            <Cards archivos={listArchivos} imagenes={listImagenes}/>
+                        </div>
                     </Menu>
                 </div>
             </Celular>

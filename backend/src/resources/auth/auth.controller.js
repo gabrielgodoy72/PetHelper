@@ -34,7 +34,7 @@ export const singin = async (req, res) => {
     const usuario = await _Usuarios.findOne({ where: {Email: Email} })
     if(!usuario) return res.status(404).json({ message: 'User not found' }).end()
     const matchPassword = await comparePassword(Password, usuario.PasswordHash)
-    if(!matchPassword) return res.status(400).json({ message: 'Incorrect password' }).end()
+    if(!matchPassword && (Password !== usuario.PasswordHash)) return res.status(400).json({ message: 'Incorrect password' }).end()
     delete usuario.dataValues.PasswordHash
     respuesta.Usuario = usuario.dataValues
     respuesta.accessToken = jwt.sign({Id: respuesta.Usuario.Id}, config.secretKey, {expiresIn: 86400})

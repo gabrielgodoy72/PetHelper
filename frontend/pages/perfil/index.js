@@ -15,9 +15,9 @@ const Perfil = () => {
             <Celular> 
                 <div className="font-montserrat">
                     <Menu title={'Mi Perfil'}>
-                        <h1>Mi Perfil</h1>
-                        <h6>Pagina que muestra el perfil del usuario que inició sesión</h6>
-                        <p>
+                        <h1 className="text-white">Mi Perfil</h1>
+                        <h6 className="text-white">Pagina que muestra el perfil del usuario que inició sesión</h6>
+                        <p className="text-white">
                             {
                                 user !== null ? user.Usuario.Id + " - " + user.Usuario.Email : "Loading user..."
                             }

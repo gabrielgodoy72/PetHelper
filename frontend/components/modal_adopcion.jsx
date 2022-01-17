@@ -1,29 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import BotonSubirFoto from './botonSubirFoto'
 import Map from './Map'
 import WarningLabel from './warningLabel'
 import ImageBox from './imageBox'
-import { getAll } from '../api/crud'
+import { getAll, post } from '../api/crud'
+import { useFormik } from 'formik'
+import useApplicationContext from '../hooks/useApplicationContext'
 
 const ModalAdopcion = ({onClose}) => {
 
+    const { user } = useApplicationContext()
     const defaultLocation = { lat: -27.30663654561394, lng: -55.88749467693345 } // UNI
     const [location, setLocation] = useState(defaultLocation)
-    const [fotosMascotas, setFotosMascotas] = useState([])
 
     const {data: sexosData, statusCode: statusCodeSexos} = getAll('/api/sexos')
     const {data: especiesData, statusCode: statusCodeEspecies} = getAll('/api/especies')
     const {data: razasData, statusCode: statusCodeRazas} = getAll('/api/razas')
     const {data: estadosData, statusCode: statusCodeEstados} = getAll('/api/estados')
+    const {data: fichaData, statusCode: statusCodeFicha, fetchData: postFicha } = post("/api/archivos");
 
     const [listSexos, setListSexos] = useState([])
     const [listRazas, setListRazas] = useState([])
     const [listEspecies, setListEspecies] = useState([])
 
-    const [sexoActual, setSexoActual] = useState(1)
-    const [razaActual, setRazaActual] = useState(1)
+    const [fotosMascotas, setFotosMascotas] = useState([])
     const [especieActual, setEspecieActual] = useState(0)
-    const [descripcion, setDescripcion] = useState('')
 
     useEffect(() => {
         if(especiesData.length && sexosData.length && razasData.length) {
@@ -33,71 +34,86 @@ const ModalAdopcion = ({onClose}) => {
             setEspecieActual(perro.Id)
         }
     }, [statusCodeEspecies, statusCodeSexos, statusCodeRazas])
-    
+
     useEffect(() => {
         Array.isArray(razasData) && setListRazas(
             razasData.filter(raza => raza.EspecieId === parseInt(especieActual))
             .sort((a, b) => { return (a.Nombre > b.Nombre)? 1 : (a.Nombre < b.Nombre)? -1 : 0 })
             )
-        }, [especieActual])
-        
-        const handleSexSelector = (event) => {
-            setSexoActual(event.target.value)
-        }
-        
-        const handleRaceSelector = (event) => {
-            setRazaActual(event.target.value)
-        }
-        
-        const handleSpeciesSelector = (event) => {
-            setEspecieActual(event.target.value)
-        }
-        
-        const handleDescriptionChange = (event) => {
-            setDescripcion(event.target.value)
-        }
-        
-        const handleAddMarker = ({ lat, lng }) => {
-            setLocation({ lat, lng })
-        }
-        
-        const handleAddImage = e => {
-            setFotosMascotas([...fotosMascotas, e.target.files[0].name])
+    }, [especieActual])
+
+    useEffect(() => {
+        fichaData && alert('Ficha Cargada')
+    }, [statusCodeFicha])
+
+    const handleSpeciesSelector = (event) => {
+        setEspecieActual(event.target.value)
     }
-    
+
+    const handleAddMarker = ({ lat, lng }) => {
+        setLocation({ lat, lng })
+    }
+
+    const handleAddImage = e => {
+        setFotosMascotas([...fotosMascotas, e.target.files[0].name])
+    }
+
     const handleSortImages = index => {
         fotosMascotas[index] && setFotosMascotas([fotosMascotas.splice(index, 1), ...fotosMascotas])
     }
-    
+
     const handleRemoveImage = index => {
         const aux = [...fotosMascotas]
         aux.splice(index, 1)
         setFotosMascotas(aux)
     }
-    
-    const handleSaveData = () => {
-        const reporte = estadosData.find(estado => estado.Nombre === 'Para Adoptar')
-        const ficha = {
-            Id: 0,
-            Edad: 0,
-            FechaPublicacion: new Date(),
-            Descripcion: descripcion,
-            SexoId: parseInt(sexoActual),
-            RazaId: parseInt(razaActual),
-            UsuarioId: '------',
-            EstadoId: reporte.Id
+
+    const formik = useFormik({
+        initialValues:{
+            Nombre: '',
+            Edad: '',
+            SexoId: listSexos[0],
+            RazaId: listRazas[0],
+            Descripcion: ''
+        },
+        onSubmit: values => {
+            const reporte = estadosData.find(estado => estado.Nombre === 'Para Adoptar')
+            const fechaActual = new Date()
+            const ficha = {
+                Nombre: values.Nombre,
+                Edad: values.Edad,
+                FechaPublicacion: `${fechaActual.getFullYear()}-${fechaActual.getMonth() + 1}-${fechaActual.getDate()}`,
+                SexoId: parseInt(values.SexoId) || listSexos[0].Id,
+                RazaId: parseInt(values.RazaId) || listRazas[0].Id,
+                UsuarioId: user.Usuario.Id,
+                EstadoId: reporte.Id,
+                Descripcion: values.Descripcion,
+                Imagenes: fotosMascotas.flat(3)
+            }
+            postFicha(ficha)
         }
-        console.log(ficha)
-    }
+    })
 
     return (
         <div className="x-center">
             <div className="bg-fake" style={{position: 'absolute', zIndex: '4'}}></div>
             <div className="x-center w-100 h-100 py-4" style={{position: 'absolute', zIndex: '5'}}>
-                <div className="mi-modal">
+                <form className="mi-modal" onSubmit={formik.handleSubmit}>
                     <div className="modal-header">
                         <h5 className="modal-title">Dar en Adopción</h5>
-                        <button className="btn-close" aria-label="Close" onClick={() => onClose()} />
+                        <button type='button' className="btn-close" aria-label="Close" onClick={() => onClose()} />
+                    </div>
+                    <div className='d-flex p-0'>
+                        <div className='mx-2'>
+                            <label htmlFor="nombre" className="label">Nombre</label>
+                            <input id='nombre' type="text" className="form-control miInput" name='Nombre'
+                                value={formik.values.Nombre} onChange={formik.handleChange} autoComplete='off'/>
+                        </div>
+                        <div className='mx-2'>
+                            <label htmlFor="edad" className="label">Edad</label>
+                            <input id='edad' type="text" className="form-control miInput" name='Edad'
+                                value={formik.values.Edad} onChange={formik.handleChange} autoComplete='off'/>
+                        </div>
                     </div>
                     <div className="mx-2 d-flex">
                         <div className="d-flex flex-column" style={{width:'64%'}}>
@@ -119,27 +135,27 @@ const ModalAdopcion = ({onClose}) => {
                         <div className="mx-1"  style={{width:'35%'}}>
                             <div>
                                 <label htmlFor="sexo" className="label">Sexo</label>
-                                <select id='sexo' className="form-select miSelector" 
-                                    onChange={(e) => handleSexSelector(e)} value={sexoActual}>
-                                    {listSexos.map(sexo => 
+                                <select id='sexo' className="form-select miInput" name='SexoId'
+                                    onChange={formik.handleChange} value={formik.values.SexoId}>
+                                    {listSexos.map(sexo =>
                                         <option value={sexo.Id} key={sexo.Id}>{sexo.Nombre}</option>)
                                     }
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="especie" className="label">Especie</label>
-                                <select id='especie' className="form-select miSelector" 
+                                <select id='especie' className="form-select miInput"
                                     onChange={(e) => handleSpeciesSelector(e)} value={especieActual}>
-                                    {listEspecies.map(especie => 
+                                    {listEspecies.map(especie =>
                                         <option value={especie.Id} key={especie.Id}>{especie.Nombre}</option>)
                                     }
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="raza" className="label">Raza</label>
-                                <select id='raza' className="form-select miSelector" 
-                                    onChange={(e) => handleRaceSelector(e)} value={razaActual}>
-                                    {listRazas.map(raza => 
+                                <select id='raza' className="form-select miInput" name='RazaId'
+                                    onChange={formik.handleChange} value={formik.values.RazaId}>
+                                    {listRazas.map(raza =>
                                         <option value={raza.Id} key={raza.Id}>{raza.Nombre}</option>)
                                     }
                                 </select>
@@ -148,23 +164,23 @@ const ModalAdopcion = ({onClose}) => {
                     </div>
                     <WarningLabel enable={fotosMascotas.length === 3} fontSize='9px' text='El límite es de 3 imágenes'/>
                     <div className='mx-2'>
-                        <label htmlFor="descripcion" className="label">Información Adicional</label>
-                        <textarea className="form-control" id="descripcion" rows="3" style={{fontSize:'10px'}}
-                                  value={descripcion} onChange={(e) => handleDescriptionChange(e)}></textarea>
+                        <label htmlFor="descripcion" className="label">Requisitos que solicitas, tenga la persona adoptante</label>
+                        <textarea className="form-control" id="descripcion" name='Descripcion' rows="3" style={{fontSize:'10px'}}
+                                    value={formik.values.Descripcion} onChange={formik.handleChange}></textarea>
                     </div>
                     <div className='mx-2 h-100'>
                         <label htmlFor="mapa" className="label">Donde se encuentra? elige un punto en el mapa</label>
                         <Map location={location} zoomLevel={18} addMarker={handleAddMarker} />
                     </div>
                     <div className="modal-footer mt-auto p-2">
-                        <button className="btn btn-outline-secondary" onClick={() => onClose()}>
+                        <button type='button' className="btn btn-outline-secondary" onClick={() => onClose()}>
                             Cancelar
                         </button>
-                        <button className="btn btn-save" onClick={() => handleSaveData()}>
+                        <button type='submit' className="btn btn-save">
                             Guardar
                         </button>
                     </div>
-                </div> 
+                </form>
             </div>
             <style jsx>{`
                 .bg-fake {
@@ -173,18 +189,18 @@ const ModalAdopcion = ({onClose}) => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 100%; 
+                    width: 100%;
                     height: 100%;
                 }
-                .btn-save { 
+                .btn-save {
                     background: #FAAB55;
                     color: white;
                 }
                 .btn-save:hover {
                     background: #FF8E13;
                 }
-                .miSelector {
-                    font-size: 10px; 
+                .miInput {
+                    font-size: 10px;
                     height: 30px;
                 }
             `}</style>

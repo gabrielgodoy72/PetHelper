@@ -1,25 +1,32 @@
-import Celular from "../../../components/celular"
-import Head from "next/head"
-import Menu from "../../../components/menu"
+import Celular from "../../../components/celular";
+import Head from "next/head";
+import Menu from "../../../components/menu";
+import Profile from "../../../components/Profile";
+import { useRouter } from "next/router";
 
 const Perfil = () => {
-
-    return (
-        <div>
-            <Head>
-                <title>Mi Perfil</title>
-            </Head>
-            <Celular> 
-                <div className="font-montserrat">
-                    <Menu title={'Perfiles'}>
-                        <h1 className="text-white">Mi Perfil</h1>
-                        <h6 className="text-white">Pagina que muestra el perfil del usuario creó la card</h6>
-                    </Menu>
-                </div>
-            </Celular>
+  const router = useRouter();
+  const id = parseInt(router.query.pid);
+  /*
+    Aqui se deberia llamar a api/usuarios/id
+    y pasarlo al <Profile />
+    */
+  return (
+    <div>
+      <Head>
+        <title>Perfil</title>
+      </Head>
+      <Celular>
+        <div className="font-montserrat">
+          <Menu title={"Perfiles"}>
+            {/*
+                 <Profile usuario={usuario.Usuario} isUserLogin={false} />
+                 */}
+          </Menu>
         </div>
-    )
+      </Celular>
+    </div>
+  );
+};
 
-}
-
-export default Perfil
+export default Perfil;

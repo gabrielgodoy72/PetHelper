@@ -64,6 +64,13 @@ export const getById = async(req, res) => {
     result? res.status(200).json(result).end() : res.status(404).json({ message: 'Archive not found' }).end()
 }
 
+export const getByUserId = async(req, res) => {
+    const id = parseInt(req.params.id)
+    if(isNaN(id)) return res.status(400).json({ message: 'Id must be integer type' }).end()
+    const result = await Archivos.findAll({ where: {UsuarioId: id} })
+    result? res.status(200).json(result).end() : res.status(404).json({ message: 'Archives not found' }).end()
+}
+
 export const deleteById = async(req, res) => {
     const id = parseInt(req.params.id)
     if(isNaN(id)) return res.status(400).json({ message: 'Id must be integer type' }).end()

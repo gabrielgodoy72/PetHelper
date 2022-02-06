@@ -1,12 +1,14 @@
 import { Button, Container } from "react-bootstrap";
+import Cards from "./cards";
 
-const Profile = ({ usuario, isUserLogin }) => {
+const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
   const profile = {
     position: "absolute",
     top: "20vh",
     marginLeft: "2%",
     borderRadius: "50%",
   };
+
   return (
     <div className="text-white">
       <div style={{ height: "20vh" }}>
@@ -31,13 +33,23 @@ const Profile = ({ usuario, isUserLogin }) => {
           <p>Amante de los animales</p>
         </div>
         <div className="m-2">
-          <Button
-            size="sm"
-            variant="warning"
-            onClick={() => alert("Abre modal para editar datos basicos...")}
-          >
-            Configurar Perfil
-          </Button>
+          {isUserLogin ? (
+            <Button
+              size="sm"
+              variant="warning"
+              onClick={() => alert("Abre modal para editar datos basicos...")}
+            >
+              Configurar Perfil
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              variant="warning"
+              onClick={() => alert("Abre whatsapp...")}
+            >
+              Contactar
+            </Button>
+          )}
         </div>
       </div>
       <Container className="mt-2 text-center">
@@ -45,7 +57,13 @@ const Profile = ({ usuario, isUserLogin }) => {
           {isUserLogin ? "Mis publicaciones" : "Publicaciones"}
         </h4>
         <div>
-          <h6>Aqui traer las publicaciones del usuario por medio de la api</h6>
+          {publicaciones.length === 0 ? (
+            "Aún no existen publicaciones"
+          ) : (
+            <div className="overflow-auto border" style={{ height: "45rem" }}>
+              <Cards archivos={publicaciones} imagenes={imagenes} />
+            </div>
+          )}
         </div>
       </Container>
     </div>

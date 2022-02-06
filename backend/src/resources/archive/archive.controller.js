@@ -67,8 +67,10 @@ export const getById = async(req, res) => {
 export const getByUserId = async(req, res) => {
     const id = parseInt(req.params.id)
     if(isNaN(id)) return res.status(400).json({ message: 'Id must be integer type' }).end()
+    const user = await Usuarios.findOne({ where: {Id: id} })
     const result = await Archivos.findAll({ where: {UsuarioId: id} })
-    result? res.status(200).json(result).end() : res.status(404).json({ message: 'Archives not found' }).end()
+    const _archivos = {'Usuario': user, 'Fichas': result}
+    result? res.status(200).json(_archivos).end() : res.status(404).json({ message: 'Archives not found' }).end()
 }
 
 export const deleteById = async(req, res) => {

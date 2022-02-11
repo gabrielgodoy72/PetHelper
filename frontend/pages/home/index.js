@@ -36,7 +36,7 @@ const Home = () => {
             <Celular> 
                 <div className="font-montserrat">
                     <Menu title={'Inicio'}>
-                        <div className='overflow-auto border' style={{height:'45rem'}}>
+                        <div className='overflow-auto' style={{height:'45rem'}}>
                             <Cards archivos={listArchivos} imagenes={listImagenes}/>
                         </div>
                     </Menu>

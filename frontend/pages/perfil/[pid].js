@@ -1,14 +1,14 @@
-import Celular from "../../../components/celular";
+import Celular from "../../components/celular";
 import Head from "next/head";
-import Menu from "../../../components/menu";
-import Profile from "../../../components/Profile";
+import Menu from "../../components/menu";
+import Profile from "../../components/Profile";
 import { useRouter } from "next/router";
-import { getAll, getById } from "../../../api/crud";
+import { getAll, getById } from "../../api/crud";
 import { useEffect, useState } from "react";
 
 const Perfil = () => {
   const router = useRouter();
-  const id = parseInt(router.query.pid);
+  const id = Number(router.query.pid);
 
   const {
     data: archivos,
@@ -29,6 +29,7 @@ const Perfil = () => {
     loading: loadingU,
     error: errorU,
     statusCode: statusCodeU,
+    fetch
   } = getAll(`/api/usuarios/${id}`);
 
   const [listArchivos, setListArchivos] = useState([]);
@@ -44,6 +45,10 @@ const Perfil = () => {
       setListImagenes(imagenes);
     }
   }, [archivos, imagenes]);
+
+  useEffect(() => {
+    fetch()
+  }, [id])
 
   /*
     Aqui se deberia llamar a api/usuarios/id

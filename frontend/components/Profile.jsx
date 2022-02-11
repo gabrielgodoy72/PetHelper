@@ -13,24 +13,24 @@ const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
     <div className="text-white">
       <div style={{ height: "20vh" }}>
         <img
-          src={`img${usuario.Id}.png`}
+          src={`/img${usuario.Id}.png`}
           className="w-100 h-100"
           style={{ objectFit: "cover" }}
           alt="foto-portada"
         />
         <div style={profile}>
           <img
-            src={`profile${usuario.Id}.jpg`}
-            class="rounded-circle"
-            width="100"
+            src={`/profile${usuario.Id}.jpg`}
+            className="rounded-circle"
+            width="80"
           />
         </div>
       </div>
       <div className="d-flex justify-content-between">
-        <div style={{ marginTop: "15%", marginLeft: "2%" }}>
-          <h5>{usuario.Nombre}</h5>
-          <h6>{usuario.Direccion}</h6>
-          <p>Amante de los animales</p>
+        <div style={{ marginTop: "12%", marginLeft: "2%" }}>
+          <p className="my-0 fw-light" style={{fontSize: '12px'}}>{usuario.Nombre}</p>
+          <p className="my-0 py-0 fw-light " style={{fontSize: '10px'}}>{usuario.Direccion}</p>
+          <p className="my-0 py-0 fw-light" style={{fontSize: '10px'}}>Amante de los animales</p>
         </div>
         <div className="m-2">
           {isUserLogin ? (
@@ -52,20 +52,20 @@ const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
           )}
         </div>
       </div>
-      <Container className="mt-2 text-center">
-        <h4 className="border-bottom">
+      <div className="mt-2 text-center">
+        <h5 className="border-bottom">
           {isUserLogin ? "Mis publicaciones" : "Publicaciones"}
-        </h4>
+        </h5>
         <div>
           {publicaciones.length === 0 ? (
             "Aún no existen publicaciones"
           ) : (
-            <div className="overflow-auto border" style={{ height: "45rem" }}>
+            <div className="overflow-auto" style={{ height: "45rem" }}>
               <Cards archivos={publicaciones} imagenes={imagenes} />
             </div>
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

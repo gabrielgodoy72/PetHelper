@@ -6,9 +6,11 @@ import ImageBox from './imageBox'
 import { getAll, post } from '../api/crud'
 import { useFormik } from 'formik'
 import useApplicationContext from '../hooks/useApplicationContext'
+import { useRouter } from 'next/router'
 
-const ModalReporte = ({onClose}) => {
+const ModalReporte = ({onClose, onSave}) => {
 
+    const Router = useRouter()
     const { user } = useApplicationContext()
     const defaultLocation = { lat: -27.30663654561394, lng: -55.88749467693345 } // UNI
     const [location, setLocation] = useState(defaultLocation)
@@ -43,7 +45,10 @@ const ModalReporte = ({onClose}) => {
     }, [especieActual])
 
     useEffect(() => {
-        fichaData && alert('Ficha Cargada') && console.log(fichaData)
+        console.log(statusCodeFicha)
+        if(statusCodeFicha === 201) {
+            onSave()
+        }
     }, [statusCodeFicha])
 
     const handleSpeciesSelector = (event) => {

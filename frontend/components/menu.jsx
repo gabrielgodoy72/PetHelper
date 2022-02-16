@@ -2,6 +2,7 @@ import { useState } from "react"
 import MenuItem from "./menu_item"
 import { useRouter } from "next/router"
 import { Container, Button } from "react-bootstrap"
+import PopUp from "./pop_up_advice"
 import ModalReporte from './modal_reporte'
 import ModalAdopcion from "./modal_adopcion"
 import useApplicationContext from "../hooks/useApplicationContext"
@@ -11,7 +12,9 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     const [showMenu, setShowMenu] = useState(false)
     const [showReportModal, setshowReportModal] = useState(false)
     const [showAdoptionModal, setshowAdoptionModal] = useState(false)
-    const router = useRouter()
+    const [showPopUpReport, setShowPopUpReport] = useState(false)
+    const [showPopUpAdoption, setShowPopUpAdoption] = useState(false)
+    const router = useRouter() 
     const { removeUser } = useApplicationContext()
 
     const goToHome = () => {
@@ -34,6 +37,28 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     const handleLogout = () => {
         removeUser()
         router.push('/')
+    }
+
+    const handleSaveReport = () => {
+        setShowMenu(false)
+        setshowReportModal(false)
+        setShowPopUpReport(true)
+    }
+
+    const handleSaveAdoption = () => {
+        setShowMenu(false)
+        setshowAdoptionModal(false)
+        setShowPopUpAdoption(true)
+    }
+
+    const handlePopUpReportChange = () => {
+        setShowPopUpReport(false)
+        router.push('/perfil')
+    }
+
+    const handlePopUpAdoptionChange = () => {
+        setShowPopUpAdoption(false)
+        router.push('/perfil')
     }
 
     return (
@@ -78,10 +103,16 @@ const Menu = ({title, children, onShowAll, showAll}) => {
             </div>}
             {/* Contenido de la App, el modal se muestra sobre el contenido actual */}
             {showReportModal && 
-                <ModalReporte onClose={() => setshowReportModal(false)} />
+                <ModalReporte onClose={() => setshowReportModal(false)} onSave={handleSaveReport}/>
             }
             {showAdoptionModal && 
-                <ModalAdopcion onClose={() => setshowAdoptionModal(false)} />
+                <ModalAdopcion onClose={() => setshowAdoptionModal(false)} onSave={handleSaveAdoption}/>
+            }
+            {showPopUpReport && 
+                <PopUp onClose={handlePopUpReportChange} msg='Se ha publicado la Reporte correctamente'/>    
+            }
+            {showPopUpAdoption && 
+                <PopUp onClose={handlePopUpAdoptionChange} msg='Se ha publicado el Adopción correctamente'/>    
             }
             <div className="bg-one">
                 {children}

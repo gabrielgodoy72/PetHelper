@@ -79,6 +79,16 @@ a {
     height: 95%;
 }
 
+.mi-popup {
+    background: #D1E7DD;
+    border: 1px solid rgb(218, 217, 217);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 25%;
+}
+
 .x-center {
     display: flex;
     justify-content: center;

@@ -7,7 +7,7 @@ import { getAll, post } from '../api/crud'
 import { useFormik } from 'formik'
 import useApplicationContext from '../hooks/useApplicationContext'
 
-const ModalAdopcion = ({onClose}) => {
+const ModalAdopcion = ({onClose, onSave}) => {
 
     const { user } = useApplicationContext()
     const defaultLocation = { lat: -27.30663654561394, lng: -55.88749467693345 } // UNI
@@ -43,7 +43,10 @@ const ModalAdopcion = ({onClose}) => {
     }, [especieActual])
 
     useEffect(() => {
-        fichaData && alert('Ficha Cargada')
+        console.log(statusCodeFicha)
+        if(statusCodeFicha === 201) {
+            onSave()
+        }
     }, [statusCodeFicha])
 
     const handleSpeciesSelector = (event) => {

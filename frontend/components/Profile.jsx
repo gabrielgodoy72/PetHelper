@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button, Container } from "react-bootstrap";
 import Cards from "./cards";
 
@@ -42,13 +43,16 @@ const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
               Configurar Perfil
             </Button>
           ) : (
-            <Button
-              size="sm"
-              variant="warning"
-              onClick={() => alert("Abre whatsapp...")}
-            >
-              Contactar
-            </Button>
+            <Link href='/whatsapp'>
+              <a>
+                <Button
+                  size="sm"
+                  variant="warning"
+                >
+                  Contactar
+                </Button>
+              </a>
+            </Link>
           )}
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 
 const Previsualizacion = ({archivo, imagenes, onShowAll, showAll}) => {
@@ -30,9 +31,13 @@ const Previsualizacion = ({archivo, imagenes, onShowAll, showAll}) => {
                     <p className="info"><strong>Lugar: </strong>---</p>
                 </div>
                 <div className="px-2 pt-1" style={{width: '7rem'}}>
-                    <div className="boton d-flex justify-content-around">
-                        Adoptar <img alt="whatsapp icon" src="/whatsapp.svg" />
-                    </div>
+                    <Link href='/whatsapp'>
+                        <a className="text-decoration-none text-black">
+                            <div className="boton d-flex justify-content-around">
+                                Adoptar <img alt="whatsapp icon" src="/whatsapp.svg" />
+                            </div>
+                        </a>
+                    </Link>
                     {!showAll && <div className="boton d-flex justify-content-around" onClick={() => onShowAll()}>
                         Mas Info <img alt="info icon" src="/info.svg" />
                     </div>}

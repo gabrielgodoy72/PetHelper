@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button, Container } from "react-bootstrap";
-import Cards from "./cards";
+import { BsWhatsapp } from 'react-icons/bs'
+import Posts from "./posts";
 
 const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
   const profile = {
@@ -49,23 +50,23 @@ const Profile = ({ usuario, isUserLogin, publicaciones, imagenes }) => {
                   size="sm"
                   variant="warning"
                 >
-                  Contactar
+                  Contactar <BsWhatsapp />
                 </Button>
               </a>
             </Link>
           )}
         </div>
       </div>
-      <div className="mt-2 text-center">
+      <div className=" text-center">
         <h5 className="border-bottom">
           {isUserLogin ? "Mis publicaciones" : "Publicaciones"}
         </h5>
-        <div>
+        <div className="overflow-auto">
           {publicaciones.length === 0 ? (
             "Aún no existen publicaciones"
           ) : (
-            <div className="overflow-auto" style={{ height: "45rem" }}>
-              <Cards archivos={publicaciones} imagenes={imagenes} />
+            <div style={{ height: "27rem" }}>
+              <Posts archivos={publicaciones} imagenes={imagenes} />
             </div>
           )}
         </div>

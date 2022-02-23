@@ -52,12 +52,12 @@ const Menu = ({title, children, onShowAll, showAll}) => {
     }
 
     const handlePopUpReportChange = () => {
-        setShowPopUpReport(false)
+        // setShowPopUpReport(false)
         router.push('/perfil')
     }
 
     const handlePopUpAdoptionChange = () => {
-        setShowPopUpAdoption(false)
+        // setShowPopUpAdoption(false)
         router.push('/perfil')
     }
 
